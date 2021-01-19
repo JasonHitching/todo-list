@@ -1,20 +1,38 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <TodoList :todoItems="todoList" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "./components/HelloWorld.vue";
+import TodoList from "./components/TodoList.vue";
+
+interface TodoItem {
+  id: number;
+  name: string;
+  description: string;
+}
 
 @Component({
   components: {
-    HelloWorld
+    TodoList
   }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  private todoList: TodoItem[] = [
+    {
+      id: 1,
+      name: "Lorem ipsum dolor sit",
+      description: "Lorem ipsum dolor sit"
+    },
+    {
+      id: 2,
+      name: "Lorem ipsum dolor sit",
+      description: "Lorem ipsum dolor sit"
+    }
+  ];
+}
 </script>
 
 <style>
