@@ -30,6 +30,21 @@ export default class App extends Vue {
       id: 2,
       name: "Lorem ipsum dolor sit",
       description: "Lorem ipsum dolor sit"
+    },
+    {
+      id: 3,
+      name: "Lorem ipsum dolor sit",
+      description: "Lorem ipsum dolor sit"
+    },
+    {
+      id: 4,
+      name: "Lorem ipsum dolor sit",
+      description: "Lorem ipsum dolor sit"
+    },
+    {
+      id: 5,
+      name: "Lorem ipsum dolor sit",
+      description: "Lorem ipsum dolor sit"
     }
   ];
 }
