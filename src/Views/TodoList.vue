@@ -1,13 +1,22 @@
 <template>
   <div>
     <div class="todo-container w-50 mx-auto">
-      <b-button>New task +</b-button>
+      <b-button @click="$bvModal.show('new-task')">New task +</b-button>
 
       <div class="card-container mx-auto">
         <TodoCard v-for="todo in todoList" :key="todo.id" :todoItem="todo" />
       </div>
       <h1 class="no-task" v-if="!todoList.length">You're free, no tasks!</h1>
     </div>
+    <b-modal id="new-task" hide-footer>
+      <template #modal-title> Add a new task </template>
+      <div class="d-block text-center">
+        <h3>HI NEW TASK</h3>
+      </div>
+      <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')"
+        >Close Me</b-button
+      >
+    </b-modal>
   </div>
 </template>
 
