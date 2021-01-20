@@ -1,8 +1,11 @@
 <template>
   <div>
-    <b-button>New task +</b-button>
-    <div class="todo-container mx-auto w-50">
-      <TodoCard v-for="todo in todoList" :key="todo.id" :todoItem="todo" />
+    <div class="todo-container w-50 mx-auto">
+      <b-button>New task +</b-button>
+
+      <div class="card-container mx-auto">
+        <TodoCard v-for="todo in todoList" :key="todo.id" :todoItem="todo" />
+      </div>
       <h1 class="no-task" v-if="!todoList.length">You're free, no tasks!</h1>
     </div>
   </div>
@@ -23,8 +26,7 @@ export default class TodoList extends Vue {
     {
       id: 1,
       name: "Lorem ipsum dolor sit",
-      description:
-        "Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor sit"
+      description: "Lorem ipsum dolor sit"
     },
     {
       id: 2,
@@ -52,7 +54,7 @@ export default class TodoList extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.todo-container {
+.card-container {
   display: grid;
   grid-template-columns: 50% 50%;
   column-gap: 10px;
@@ -61,6 +63,10 @@ export default class TodoList extends Vue {
   margin: 15px;
   border: 2px solid black;
   border-radius: 30px;
+}
+
+.todo-container {
+  text-align: right;
 }
 
 .no-task {
