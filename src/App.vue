@@ -1,53 +1,19 @@
 <template>
   <div id="app">
-    <TodoList :todoItems="todoList" />
+    <TodoList />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import TodoList from "./components/TodoList.vue";
-
-interface TodoItem {
-  id: number;
-  name: string;
-  description: string;
-}
+import TodoList from "./Views/TodoList.vue";
 
 @Component({
   components: {
     TodoList
   }
 })
-export default class App extends Vue {
-  private todoList: TodoItem[] = [
-    {
-      id: 1,
-      name: "Lorem ipsum dolor sit",
-      description: "Lorem ipsum dolor sit"
-    },
-    {
-      id: 2,
-      name: "Lorem ipsum dolor sit",
-      description: "Lorem ipsum dolor sit"
-    },
-    {
-      id: 3,
-      name: "Lorem ipsum dolor sit",
-      description: "Lorem ipsum dolor sit"
-    },
-    {
-      id: 4,
-      name: "Lorem ipsum dolor sit",
-      description: "Lorem ipsum dolor sit"
-    },
-    {
-      id: 5,
-      name: "Lorem ipsum dolor sit",
-      description: "Lorem ipsum dolor sit"
-    }
-  ];
-}
+export default class App extends Vue {}
 </script>
 
 <style>
