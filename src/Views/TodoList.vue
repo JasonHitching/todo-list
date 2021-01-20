@@ -5,8 +5,10 @@
 
       <div class="card-container mx-auto">
         <TodoCard v-for="todo in todoList" :key="todo.id" :todoItem="todo" />
+        <h1 class="no-task" v-if="!todoList.length">
+          You're free, no tasks....
+        </h1>
       </div>
-      <h1 class="no-task" v-if="!todoList.length">You're free, no tasks!</h1>
     </div>
     <b-modal id="new-task" hide-footer>
       <template #modal-title> Add a new task </template>
@@ -21,9 +23,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import TodoCard from "../components/TodoCard.vue";
 import { TodoItem } from "../types";
+import TodoService from "../services/TodoService";
 
 @Component({
   components: {
@@ -31,33 +34,18 @@ import { TodoItem } from "../types";
   }
 })
 export default class TodoList extends Vue {
-  private todoList: TodoItem[] = [
-    {
-      id: 1,
-      name: "Lorem ipsum dolor sit",
-      description: "Lorem ipsum dolor sit"
-    },
-    {
-      id: 2,
-      name: "Lorem ipsum dolor sit",
-      description: "Lorem ipsum dolor sit"
-    },
-    {
-      id: 3,
-      name: "Lorem ipsum dolor sit",
-      description: "Lorem ipsum dolor sit"
-    },
-    {
-      id: 4,
-      name: "Lorem ipsum dolor sit",
-      description: "Lorem ipsum dolor sit"
-    },
-    {
-      id: 5,
-      name: "Lorem ipsum dolor sit",
-      description: "Lorem ipsum dolor sit"
-    }
-  ];
+  private todoList: TodoItem[] = [];
+
+  // When TodoList is created, call out to server for data
+  created() {
+    TodoService.getItems()
+      .then((response) => {
+        this.todoList = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 }
 </script>
 
