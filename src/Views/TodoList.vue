@@ -1,8 +1,7 @@
 <template>
   <div>
     <div class="todo-container w-50 mx-auto">
-      <b-button @click="$bvModal.show('new-task')">New task +</b-button>
-
+      <TodoModal />
       <div class="card-container mx-auto">
         <TodoCard v-for="todo in todoList" :key="todo.id" :todoItem="todo" />
         <h1 class="no-task" v-if="!todoList.length">
@@ -10,27 +9,21 @@
         </h1>
       </div>
     </div>
-    <b-modal id="new-task" hide-footer>
-      <template #modal-title> Add a new task </template>
-      <div class="d-block text-center">
-        <h3>HI NEW TASK</h3>
-      </div>
-      <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')"
-        >Close Me</b-button
-      >
-    </b-modal>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import TodoCard from "../components/TodoCard.vue";
+import TodoModal from "../components/TodoModal.vue";
+
 import { TodoItem } from "../types";
 import TodoService from "../services/TodoService";
 
 @Component({
   components: {
-    TodoCard
+    TodoCard,
+    TodoModal
   }
 })
 export default class TodoList extends Vue {
