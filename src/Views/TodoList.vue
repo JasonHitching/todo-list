@@ -1,10 +1,15 @@
 <template>
   <div>
     <div class="todo-container w-50 mx-auto">
-      <TodoModal />
+      <TodoModal @add-todo="addSummin" />
       <div class="card-container mx-auto">
-        <TodoCard v-for="todo in todoList" :key="todo.id" :todoItem="todo" />
-        <h1 class="no-task" v-if="!todoList.length">
+        <todo-card
+          @remove-todo="deleteSummin"
+          v-for="todo in todoList"
+          :key="todo.id"
+          :todoItem="todo"
+        />
+        <h1 class="no-task" v-if="todoList.length === 0">
           You're free, no tasks....
         </h1>
       </div>
@@ -13,15 +18,15 @@
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-property-decorator";
+import Vue from "vue";
 import TodoCard from "../components/TodoCard.vue";
 import TodoModal from "../components/TodoModal.vue";
-import "firebase";
 
 import { TodoItem } from "../types";
 import { db } from "../db";
 
 const TodoList = Vue.component("todo-list", {
+  name: "TodoList",
   // Components being used here
   components: {
     TodoCard,
@@ -32,8 +37,21 @@ const TodoList = Vue.component("todo-list", {
       todoList: [] as TodoItem[]
     };
   },
-  firebase: {
-    todoList: db.ref("todoItems") //Populate 'todoList' with firebase data
+  firestore: {
+    todoList: db.collection("todos")
+  },
+  methods: {
+    deleteSummin(todoItem: TodoItem) {
+      db.collection("todos")
+        .doc(todoItem.id)
+        .delete();
+    },
+    addSummin() {
+      db.collection("todos").add({
+        name: "jason",
+        description: "nono"
+      });
+    }
   }
 });
 

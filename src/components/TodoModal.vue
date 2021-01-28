@@ -3,10 +3,14 @@
     <b-button @click="$bvModal.show('new-task')">New task +</b-button>
 
     <b-modal id="new-task" hide-footer>
-      <template #modal-title> Add a new task </template>
+      <template #modal-title>Add a new task..</template>
       <div class="d-block text-center"></div>
-      <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')"
-        >Close Me</b-button
+      <b-button
+        class="mt-3"
+        block
+        v-on:click="$emit('add-todo')"
+        @click="$bvModal.hide('new-task')"
+        >Submit</b-button
       >
     </b-modal>
   </div>

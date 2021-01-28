@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="card-inner">
-      <h5 class="id">Task no. {{ todoItem.id }}</h5>
       <b-card-text class="card-text">
         Task Name: {{ todoItem.name }}
       </b-card-text>
@@ -9,12 +8,15 @@
         >Description: {{ todoItem.description }}
       </b-card-text>
       <p class="buttons">
-        <a class="modify-button delete-btn" href="#">
+        <button
+          class="modify-button delete-btn"
+          v-on:click="$emit('remove-todo', todoItem)"
+        >
           <font-awesome-icon icon="trash-alt" />
-        </a>
-        <a class="modify-button update-btn" href="#">
+        </button>
+        <button class="modify-button update-btn">
           <font-awesome-icon icon="edit" />
-        </a>
+        </button>
       </p>
     </div>
   </div>
@@ -25,6 +27,7 @@ import Vue, { PropType } from "vue";
 import { TodoItem } from "../types";
 
 const TodoCard = Vue.component("todo-card", {
+  name: "TodoCard",
   props: {
     todoItem: {
       type: Object as PropType<TodoItem>
@@ -48,6 +51,8 @@ export default TodoCard;
 
 .modify-button {
   font-size: 25px;
+  border: 0;
+  background: none;
 }
 
 .delete-btn {
