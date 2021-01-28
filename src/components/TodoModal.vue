@@ -4,9 +4,7 @@
 
     <b-modal id="new-task" hide-footer>
       <template #modal-title> Add a new task </template>
-      <div class="d-block text-center">
-        <h3>HI NEW TASK</h3>
-      </div>
+      <div class="d-block text-center"></div>
       <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')"
         >Close Me</b-button
       >
@@ -15,9 +13,9 @@
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-property-decorator";
-
-export default class TodoModal extends Vue {}
+import Vue from "vue";
+const TodoModal = Vue.component("todo-modal", {});
+export default TodoModal;
 </script>
 
 <style></style>

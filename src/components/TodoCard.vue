@@ -21,14 +21,18 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { Component, Prop } from "vue-property-decorator";
+import Vue, { PropType } from "vue";
 import { TodoItem } from "../types";
 
-@Component
-export default class TodoCard extends Vue {
-  @Prop() private todoItem!: TodoItem;
-}
+const TodoCard = Vue.component("todo-card", {
+  props: {
+    todoItem: {
+      type: Object as PropType<TodoItem>
+    }
+  }
+});
+
+export default TodoCard;
 </script>
 
 <style>

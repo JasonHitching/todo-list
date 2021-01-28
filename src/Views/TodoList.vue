@@ -22,6 +22,7 @@ import { TodoItem } from "../types";
 import { db } from "../db";
 
 const TodoList = Vue.component("todo-list", {
+  // Components being used here
   components: {
     TodoCard,
     TodoModal
@@ -32,7 +33,7 @@ const TodoList = Vue.component("todo-list", {
     };
   },
   firebase: {
-    todoList: db.ref("todoItems")
+    todoList: db.ref("todoItems") //Populate 'todoList' with firebase data
   }
 });
 
