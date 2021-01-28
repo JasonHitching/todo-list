@@ -9,6 +9,10 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
+import { rtdbPlugin } from "vuefire";
+
+Vue.use(rtdbPlugin);
+
 library.add(faTrashAlt, faEdit);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);

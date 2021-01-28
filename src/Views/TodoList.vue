@@ -13,33 +13,30 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Vue } from "vue-property-decorator";
 import TodoCard from "../components/TodoCard.vue";
 import TodoModal from "../components/TodoModal.vue";
+import "firebase";
 
 import { TodoItem } from "../types";
-import TodoService from "../services/TodoService";
+import { db } from "../db";
 
-@Component({
+const TodoList = Vue.component("todo-list", {
   components: {
     TodoCard,
     TodoModal
+  },
+  data() {
+    return {
+      todoList: [] as TodoItem[]
+    };
+  },
+  firebase: {
+    todoList: db.ref("todoItems")
   }
-})
-export default class TodoList extends Vue {
-  private todoList: TodoItem[] = [];
+});
 
-  // When TodoList is created, call out to server for data
-  created() {
-    TodoService.getItems()
-      .then((response) => {
-        this.todoList = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-}
+export default TodoList;
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
