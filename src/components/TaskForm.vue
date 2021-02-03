@@ -4,11 +4,11 @@
     <b-button class="add-task-btn" v-if="!addTask" v-on:click="addTask = true"
       >Add task +</b-button
     >
-    <b-form class="task-form" v-if="addTask">
+    <b-form @submit="onSubmit" class="task-form" v-if="addTask">
       <b-form-group id="input-group-1" label="Task name:" label-for="input-1">
         <b-form-input
           id="input-1"
-          type="email"
+          v-model="name"
           placeholder="Enter task name"
           required
         ></b-form-input>
@@ -21,13 +21,16 @@
         <b-form-textarea
           id="input-2"
           placeholder="Enter description.."
+          v-model="description"
           rows="3"
           max-rows="6"
         ></b-form-textarea>
       </b-form-group>
       <b-button
         v-if="addTask"
-        v-on:click="addTask = false"
+        v-on:click="
+          $emit('add-todo', name, description), (this.addTask = false)
+        "
         type="submit"
         variant="primary"
         >Submit</b-button
@@ -41,8 +44,17 @@ import Vue from "vue";
 const TaskForm = Vue.component("task-form", {
   data() {
     return {
-      addTask: false as boolean
+      addTask: false as boolean,
+      name: "" as string,
+      description: "" as string
     };
+  },
+  methods: {
+    onSubmit() {
+      this.addTask = false;
+      this.name = "";
+      this.description = "";
+    }
   }
 });
 

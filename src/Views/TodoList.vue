@@ -1,6 +1,6 @@
 <template>
   <div>
-    <task-form></task-form>
+    <task-form @add-todo="addSummin"></task-form>
     <div class="todo-container w-50 mx-auto">
       <!--<TodoModal @add-todo="addSummin" /> -->
       <div class="card-container mx-auto">
@@ -34,8 +34,7 @@ const TodoList = Vue.component("todo-list", {
   },
   data() {
     return {
-      todoList: [] as TodoItem[],
-      addTask: false as boolean
+      todoList: [] as TodoItem[]
     };
   },
   firestore: {
@@ -47,10 +46,10 @@ const TodoList = Vue.component("todo-list", {
         .doc(todoItem.id)
         .delete();
     },
-    addSummin() {
+    addSummin(taskName: string, description: string) {
       db.collection("todos").add({
-        name: "jason",
-        description: "nono"
+        name: taskName,
+        description: description
       });
     }
   }
