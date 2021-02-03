@@ -1,9 +1,10 @@
 <template>
   <div>
+    <task-form></task-form>
     <div class="todo-container w-50 mx-auto">
-      <TodoModal @add-todo="addSummin" />
+      <!--<TodoModal @add-todo="addSummin" /> -->
       <div class="card-container mx-auto">
-        <todo-card
+        <TodoCard
           @remove-todo="deleteSummin"
           v-for="todo in todoList"
           :key="todo.id"
@@ -20,8 +21,7 @@
 <script lang="ts">
 import Vue from "vue";
 import TodoCard from "../components/TodoCard.vue";
-import TodoModal from "../components/TodoModal.vue";
-
+import TaskForm from "../components/TaskForm.vue";
 import { TodoItem } from "../types";
 import { db } from "../db";
 
@@ -30,11 +30,12 @@ const TodoList = Vue.component("todo-list", {
   // Components being used here
   components: {
     TodoCard,
-    TodoModal
+    TaskForm
   },
   data() {
     return {
-      todoList: [] as TodoItem[]
+      todoList: [] as TodoItem[],
+      addTask: false as boolean
     };
   },
   firestore: {
